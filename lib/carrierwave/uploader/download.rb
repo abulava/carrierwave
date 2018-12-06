@@ -78,6 +78,8 @@ module CarrierWave
         file = RemoteFile.new(processed_uri, remote_headers)
         raise CarrierWave::DownloadError, "trying to download a file which is not served over HTTP" unless file.http?
         cache!(file)
+        file.close
+        file.unlink
       end
 
       ##
