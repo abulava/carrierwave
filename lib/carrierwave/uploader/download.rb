@@ -79,7 +79,7 @@ module CarrierWave
         raise CarrierWave::DownloadError, "trying to download a file which is not served over HTTP" unless file.http?
         cache!(file)
         file.close
-        file.unlink
+        file.unlink if file.respond_to?(:unlink)
       end
 
       ##
